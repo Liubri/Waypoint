@@ -1,0 +1,38 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "mcpServers": {
+    "graphn": {
+      "args": [
+        "mcp-serve"
+      ],
+      "command": "/opt/homebrew/bin/graphn"
+    }
+  },
+  "permissions": {
+        "allow": [
+            "Bash(npm run *)",
+            "Bash(npm test *)",
+            "Bash(npx tsc *)",
+            "Bash(git status)",
+            "Bash(git diff *)",
+            "Bash(git add *)",
+            "Bash(git commit *)",
+            "Bash(ls *)",
+            "Bash(cat *)",
+            "Bash(node *)",
+            "Bash(graphn *)",
+            "Bash(graphn)",
+            "mcp__graphn__*"
+        ],
+        "deny": [
+            "Bash(rm -rf *)",
+            "Bash(git push --force *)",
+            "Bash(git reset --hard *)",
+            "Bash(docker rm *)",
+            "Bash(DROP TABLE *)",
+            "Bash(sudo *)"
+        ]
+    }
+}
