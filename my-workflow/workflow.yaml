@@ -1,0 +1,41 @@
+document:
+  dsl: "1.0.0"
+  name: "My Workflow"
+  version: "0.1.0"
+
+# Declare the components this workflow uses
+agents:
+  # MyAgent: ""
+functions:
+  # my_function: ""
+mcp_servers:
+  # MyTools: ""
+
+# Define workflow input schema
+input:
+  query:
+    type: string
+    required: true
+    description: "Input query"
+
+# Define the execution steps (DAG)
+steps:
+  step1:
+    call: agent
+    agent: MyAgent
+    input:
+      query: ${input.query}
+    output: step1_result
+
+  # step2:
+  #   call: function
+  #   function: my_function
+  #   after:
+  #     - step1
+  #   input:
+  #     text: ${step1_result}
+  #   output: step2_result
+
+# Define workflow output
+output:
+  result: ${step1_result}

@@ -1,0 +1,32 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - generic [ref=e6]: Waypoint
+    - paragraph [ref=e7]: Tell me about your trip. I'll handle the rest.
+  - generic [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e11]: From
+        - textbox "From" [ref=e12]:
+          - /placeholder: Boston, MA
+      - generic [ref=e13]:
+        - generic [ref=e14]: To
+        - textbox "To" [ref=e15]:
+          - /placeholder: New York City
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Departure
+        - textbox "Departure" [ref=e19]
+      - generic [ref=e20]:
+        - generic [ref=e21]: Return
+        - textbox "Return" [ref=e22]
+    - generic [ref=e23]:
+      - generic [ref=e24]: Travelers
+      - textbox "Travelers" [ref=e25]:
+        - /placeholder: 2 adults
+    - generic [ref=e26]:
+      - generic [ref=e27]: What's the occasion?
+      - textbox "What's the occasion?" [ref=e28]:
+        - /placeholder: Anniversary trip, loves seafood and rooftop bars
+    - button "Plan my trip" [ref=e29] [cursor=pointer]:
+      - text: Plan my trip
+      - img [ref=e30]

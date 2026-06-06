@@ -1,0 +1,117 @@
+document:
+  dsl: "1.0.0"
+  name: "City Explorer"
+  version: "0.2.0"
+
+agents:
+  FlightScout: res://agents/agent_6ff556b46200
+  HotelScout: res://agents/agent_3b4f5ee6b7a5
+  LocalScout: res://agents/agent_d12aadb896a4
+  TripPlanner: res://agents/agent_a0aafe3330c9
+
+mcp_servers:
+  CityTools: res://mcp_servers/mcp_b5fd4283c955
+
+input:
+  origin:
+    type: string
+    description: "City you're traveling from (e.g. 'Boston, MA')"
+  destination:
+    type: string
+    description: "City or neighborhood you're visiting (e.g. 'Lower East Side, Manhattan')"
+  departure_date:
+    type: string
+    description: "Departure date in YYYY-MM-DD format (e.g. '2026-06-10')"
+  return_date:
+    type: string
+    description: "Return date in YYYY-MM-DD format (e.g. '2026-06-15')"
+  travelers:
+    type: string
+    description: "Number and type of people (e.g. '2 adults' or 'family of 4 with young kids')"
+  description:
+    type: string
+    description: "What's the occasion and any preferences? (e.g. 'anniversary trip, loves seafood')"
+
+steps:
+  flights:
+    call: agent
+    agent: FlightScout
+    input_template: |
+      Generate mock flight options for this trip:
+
+      - Origin: ${input.origin}
+      - Destination: ${input.destination}
+      - Departure date: ${input.departure_date}
+      - Return date: ${input.return_date}
+      - Travelers: ${input.travelers}
+
+      Provide economy and first class options for both the outbound and return flights.
+    output: flight_options
+
+  hotels:
+    call: agent
+    agent: HotelScout
+    input_template: |
+      Generate mock hotel options for this trip:
+
+      - Destination: ${input.destination}
+      - Check-in: ${input.departure_date}
+      - Check-out: ${input.return_date}
+      - Travelers: ${input.travelers}
+      - Occasion: ${input.description}
+
+      Provide a range of options from budget to luxury.
+    output: hotel_options
+
+  scout:
+    call: agent
+    agent: LocalScout
+    input_template: |
+      Research options for the following trip:
+
+      <trip>
+      Location: ${input.destination}
+      Dates: ${input.departure_date} to ${input.return_date}
+      Group: ${input.travelers}
+      Occasion: ${input.description}
+      </trip>
+
+      For weather forecasts, use the departure date in YYYY-MM-DD format.
+    output: research_brief
+
+  plan:
+    call: agent
+    agent: TripPlanner
+    after:
+      - flights
+      - hotels
+      - scout
+    input_template: |
+      Build a complete travel plan from the research below.
+
+      Trip context:
+      - Origin: ${input.origin}
+      - Destination: ${input.destination}
+      - Dates: ${input.departure_date} to ${input.return_date}
+      - Travelers: ${input.travelers}
+      - Occasion: ${input.description}
+
+      <flights>
+      ${flight_options}
+      </flights>
+
+      <hotels>
+      ${hotel_options}
+      </hotels>
+
+      <research>
+      ${research_brief}
+      </research>
+    output: itinerary
+
+output:
+  result: ${ steps.plan.output }
+
+chat_hints:
+  - "Plan a trip from Boston to NYC for 2 adults this weekend, anniversary dinner"
+  - "Find flights and hotels from Chicago to Miami, June 20-25, family of 4"
