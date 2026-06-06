@@ -1,100 +1,117 @@
 .page {
   min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+/* ── Hero ── */
+.hero {
+  background: var(--amber);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 24px;
-  gap: 48px;
+  padding: 60px 24px 52px;
+  gap: 12px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.header {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 120%, oklch(0.60 0.18 65 / 0.5) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .logo {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  color: var(--ink);
-  letter-spacing: -0.02em;
   font-style: italic;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  position: relative;
 }
 
 .tagline {
-  color: var(--muted);
-  font-size: 1.05rem;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: var(--navy);
+  opacity: 0.75;
   font-weight: 400;
+  position: relative;
+}
+
+/* ── Form panel ── */
+.panel {
+  background: var(--bg);
+  padding: 36px 24px 48px;
+  display: flex;
+  justify-content: center;
 }
 
 .form {
   width: 100%;
-  max-width: 520px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .label {
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: 0.78rem;
+  font-weight: 600;
   color: var(--ink-2);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .input {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--bg);
+  border: 1.5px solid var(--border-mid);
   border-radius: var(--radius-md);
   color: var(--ink);
   font-family: var(--font-sans);
-  font-size: 0.95rem;
-  padding: 12px 14px;
+  font-size: 0.97rem;
+  padding: 11px 14px;
   width: 100%;
-  transition: border-color 0.15s var(--ease-out), background 0.15s var(--ease-out);
+  transition: border-color 0.15s var(--ease-out);
   resize: none;
 }
 
-.input::placeholder {
-  color: var(--muted);
-}
+.input::placeholder { color: var(--muted); }
 
-.input:hover {
-  border-color: var(--border-subtle);
-  background: var(--surface-2);
-}
-
+.input:hover { border-color: var(--navy-mid); }
 .input:focus {
   outline: none;
-  border-color: var(--primary);
-  background: var(--surface-2);
+  border-color: var(--navy);
+  background: var(--surface);
 }
 
-/* Date input color fix */
 .input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.6);
+  opacity: 0.5;
   cursor: pointer;
 }
 
 .error {
   font-size: 0.88rem;
-  color: oklch(0.65 0.18 25);
-  background: oklch(0.12 0.04 25);
-  border: 1px solid oklch(0.22 0.08 25);
+  color: oklch(0.45 0.18 25);
+  background: oklch(0.96 0.04 25);
+  border: 1.5px solid oklch(0.82 0.10 25);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
 }
@@ -104,29 +121,23 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: var(--primary);
-  color: oklch(0.08 0 0);
+  background: var(--amber);
+  color: oklch(0.96 0 0);
   font-family: var(--font-sans);
-  font-size: 0.97rem;
+  font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: var(--radius-md);
   padding: 14px 20px;
   cursor: pointer;
-  width: 100%;
-  margin-top: 4px;
+  margin-top: 6px;
   transition: background 0.15s var(--ease-out), transform 0.1s var(--ease-out);
 }
 
-.submit:hover {
-  background: oklch(0.68 0.20 140);
-}
-
-.submit:active {
-  transform: scale(0.985);
-}
+.submit:hover  { background: var(--amber-deep); }
+.submit:active { transform: scale(0.985); }
 
 @media (max-width: 480px) {
   .row { grid-template-columns: 1fr; }
-  .page { padding: 32px 20px; gap: 36px; }
+  .hero { padding: 48px 20px 40px; }
 }

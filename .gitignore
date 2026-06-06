@@ -3,3 +3,4 @@ backend/node_modules
 backend/output.json
 node_modules
 .DS_Store
+.playwright-mcp

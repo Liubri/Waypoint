@@ -3,7 +3,6 @@ import SearchForm from './components/SearchForm.jsx';
 import Results from './components/Results.jsx';
 import Loading from './components/Loading.jsx';
 import { planTrip } from './api.js';
-import styles from './App.module.css';
 
 const DEMO = new URLSearchParams(location.search).has('demo');
 
@@ -16,7 +15,6 @@ export default function App() {
     DEMO ? { origin: 'Boston, MA', destination: 'New York City' } : null
   );
 
-  // Load demo data on mount
   useState(() => {
     if (!DEMO) return;
     fetch('/demo.json')
@@ -46,14 +44,10 @@ export default function App() {
   }
 
   return (
-    <div className={styles.app}>
-      {phase === 'search' && (
-        <SearchForm onSubmit={handleSearch} error={error} />
-      )}
-      {phase === 'loading' && (
-        <Loading status={loadStatus} query={query} />
-      )}
-      {phase === 'results' && result && (
+    <div>
+      {phase === 'search' && <SearchForm onSubmit={handleSearch} error={error} />}
+      {phase === 'loading' && <Loading status={loadStatus} query={query} />}
+      {(phase === 'results' || phase === 'loading-demo') && result && (
         <Results data={result} query={query} onReset={handleReset} />
       )}
     </div>

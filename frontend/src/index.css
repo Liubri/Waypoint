@@ -1,34 +1,30 @@
 /* ── Tokens ── */
 :root {
-  --bg:        oklch(0.08 0.000 0);
-  --surface:   oklch(0.13 0.008 140);
-  --surface-2: oklch(0.19 0.010 140);
-  --surface-3: oklch(0.24 0.010 140);
-  --primary:   oklch(0.62 0.18 140);
-  --primary-dim: oklch(0.50 0.14 140);
-  --accent:    oklch(0.78 0.12 82);
-  --accent-dim: oklch(0.65 0.10 82);
-  --ink:       oklch(0.94 0.000 0);
-  --ink-2:     oklch(0.75 0.006 140);
-  --muted:     oklch(0.52 0.008 140);
-  --border:    oklch(0.22 0.008 140);
-  --border-subtle: oklch(0.17 0.006 140);
+  --amber:       oklch(0.32 0.10 145);
+  --amber-deep:  oklch(0.24 0.10 145);
+  --amber-light: oklch(0.94 0.04 145);
+  --navy:        oklch(0.96 0.000 0);
+  --navy-mid:    oklch(0.82 0.008 145);
+  --ink:         oklch(0.16 0.04 145);
+  --ink-2:       oklch(0.36 0.06 145);
+  --muted:       oklch(0.54 0.04 145);
+  --bg:          oklch(1 0 0);
+  --surface:     oklch(0.97 0.012 145);
+  --border:      oklch(0.88 0.016 145);
+  --border-mid:  oklch(0.80 0.020 145);
 
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans:   'Inter', system-ui, sans-serif;
+  --font-serif:  'Instrument Serif', Georgia, serif;
 
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  18px;
+  --radius-xl:  26px;
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { font-size: 16px; -webkit-font-smoothing: antialiased; }
-
+html { -webkit-font-smoothing: antialiased; }
 body {
   background: var(--bg);
   color: var(--ink);
@@ -37,19 +33,12 @@ body {
   min-height: 100dvh;
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
-
-/* ── Focus ── */
 :focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2.5px solid var(--navy);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
